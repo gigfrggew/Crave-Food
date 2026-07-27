@@ -5,9 +5,30 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family:'NHaasGroteskDSPro-65Md' !important;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* 1. Sets the fixed height for the carousel frame */
+#carousel{
+  max-height: 600px; 
+  /* Removed: object-fit property here */
+}
+
+/* 2. Targets the image element for sizing and fitting */
+.carousel-item img {
+  height: 600px; /* ⚠️ MUST match the max-height of #carousel */
+  width: 100%;
+  object-fit:fill; /* This is the key change: scales the image down to fit completely inside the box. */
+  
+  /* OPTIONAL: Add a background color to fill the space around the image */
+  background-color: black; 
+}
+
+.carousel-item{
+  background-size: auto;
 }
