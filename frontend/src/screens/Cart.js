@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCart, useDispatchCart } from '../components/ContextReducer';
+import { useCart, useDispatchCart } from '../context/ContextReducer';
 import trash from "../trash.svg";
 
 export default function Cart() {

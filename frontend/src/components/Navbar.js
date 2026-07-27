@@ -1,9 +1,9 @@
 import React, { useState } from 'react' // Import useState
 import { Link, useNavigate } from 'react-router-dom'
 import Badge from 'react-bootstrap/Badge'
-import Modal from '../Modal' // Assuming Modal is in src/Modal.js
+import Modal from './Modal' // Assuming Modal is in src/Modal.js
 import Cart from '../screens/Cart' // Assuming Cart is in src/screens/Cart.js
-import { useCart } from './ContextReducer' // Import useCart to get item count
+import { useCart } from '../context/ContextReducer' // Import useCart to get item count
 
 export default function Navbar() {
     const [cartView, setCartView] = useState(false) // 1. State to manage modal visibility
