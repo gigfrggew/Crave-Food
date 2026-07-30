@@ -27,12 +27,13 @@ export default function MyOrder() {
     }, [])
 
     return (
-        <div>
+        <div className="orders-page">
             <div>
                 <Navbar />
             </div>
 
-            <div className='container'>
+            <main className='container orders-content'>
+                <div className="section-heading"><div><p className="section-kicker">Order history</p><h1 className="category-title">Your past favourites</h1></div></div>
                 <div className='row'>
                     {orderData && orderData.orderData && orderData.orderData.order_data ? 
                         orderData.orderData.order_data.slice(0).reverse().map((orderGroup, groupIndex) => {
@@ -43,7 +44,7 @@ export default function MyOrder() {
                                         if (item.Order_date) {
                                             return (
                                                 <div key={itemIndex} className='m-auto mt-5'>
-                                                    <div className='text-center'>
+                                                    <div className='order-date'>
                                                         <h4>{item.Order_date}</h4>
                                                         <hr />
                                                     </div>
@@ -56,7 +57,7 @@ export default function MyOrder() {
                                                 if (arrayData.Order_date) {
                                                     return (
                                                         <div key={arrayIndex} className='m-auto mt-5'>
-                                                            <div className='text-center'>
+                                                        <div className='order-date'>
                                                                 <h4>{arrayData.Order_date}</h4>
                                                                 <hr />
                                                             </div>
@@ -65,25 +66,21 @@ export default function MyOrder() {
                                                 } else {
                                                     return (
                                                         <div key={arrayIndex} className='col-12 col-md-6 col-lg-3'>
-                                                            <div className="card mt-3" style={{ width: "16rem", maxHeight: "360px" }}>
+                                                            <div className="card order-card mt-3">
                                                                 <img 
                                                                     src={arrayData.img} 
                                                                     className="card-img-top" 
                                                                     alt={arrayData.name || "Food item"} 
-                                                                    style={{ height: "120px", objectFit: "cover" }} 
                                                                     onError={(e) => {
                                                                         e.target.src = 'https://via.placeholder.com/256x120?text=No+Image'
                                                                     }}
                                                                 />
                                                                 <div className="card-body">
                                                                     <h5 className="card-title">{arrayData.name}</h5>
-                                                                    <div className='container w-100 p-0' style={{ height: "38px" }}>
-                                                                        <span className='m-1'>Qty: {arrayData.qty}</span>
-                                                                        <span className='m-1'>Size: {arrayData.size}</span>
-                                                                        <div className='d-inline ms-2 h-100 fs-5'>
-                                                                            ₹{arrayData.price}/-
-                                                                        </div>
+                                                                    <div className='order-meta'>
+                                                                        <span>Qty: {arrayData.qty}</span><span>•</span><span>{arrayData.size}</span>
                                                                     </div>
+                                                                    <div className='order-price'>₹{arrayData.price}/-</div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -95,25 +92,21 @@ export default function MyOrder() {
                                         else {
                                             return (
                                                 <div key={itemIndex} className='col-12 col-md-6 col-lg-3'>
-                                                    <div className="card mt-3" style={{ width: "16rem", maxHeight: "360px" }}>
+                                                    <div className="card order-card mt-3">
                                                         <img 
                                                             src={item.img} 
                                                             className="card-img-top" 
                                                             alt={item.name || "Food item"} 
-                                                            style={{ height: "120px", objectFit: "cover" }} 
                                                             onError={(e) => {
                                                                 e.target.src = 'https://via.placeholder.com/256x120?text=No+Image'
                                                             }}
                                                         />
                                                         <div className="card-body">
                                                             <h5 className="card-title">{item.name}</h5>
-                                                            <div className='container w-100 p-0' style={{ height: "38px" }}>
-                                                                <span className='m-1'>Qty: {item.qty}</span>
-                                                                <span className='m-1'>Size: {item.size}</span>
-                                                                <div className='d-inline ms-2 h-100 fs-5'>
-                                                                    ₹{item.price}/-
-                                                                </div>
+                                                            <div className='order-meta'>
+                                                                <span>Qty: {item.qty}</span><span>•</span><span>{item.size}</span>
                                                             </div>
+                                                            <div className='order-price'>₹{item.price}/-</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -129,7 +122,7 @@ export default function MyOrder() {
                         </div>
                     }
                 </div>
-            </div>
+            </main>
 
             <Footer />
         </div>

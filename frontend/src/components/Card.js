@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useDispatchCart, useCart } from '../context/ContextReducer'
+
 export default function Card(props) {
     let dispatch = useDispatchCart();
     let data = useCart();
@@ -9,80 +10,35 @@ export default function Card(props) {
     const [qty, setQty] = useState(1)
     const [size, setSize] = useState("")
     const handleAddToCart = async () => {
-
-    let existingItem = data.find(item => item.id === props.foodItem._id);
-
-    if (existingItem) {
-
-        if (existingItem.size === size) {
-            await dispatch({
-                type: "UPDATE",
-                id: props.foodItem._id,
-                price: finalPrice,
-                qty: qty,
-                size: size
-            });
-            return;
-        } else {
-            await dispatch({
-                type: "ADD",
-                id: props.foodItem._id,
-                name: props.foodItem.name,
-                price: finalPrice,
-                qty: qty,
-                size: size,
-                img: props.foodItem.img   // ✅ IMPORTANT
-            });
+        let existingItem = data.find(item => item.id === props.foodItem._id);
+        if (existingItem) {
+            if (existingItem.size === size) {
+                await dispatch({ type: "UPDATE", id: props.foodItem._id, price: finalPrice, qty: qty, size: size });
+                return;
+            }
+            await dispatch({ type: "ADD", id: props.foodItem._id, name: props.foodItem.name, price: finalPrice, qty: qty, size: size, img: props.foodItem.img });
             return;
         }
-    }
-
-    await dispatch({
-        type: "ADD",
-        id: props.foodItem._id,
-        name: props.foodItem.name,
-        price: finalPrice,
-        qty: qty,
-        size: size,
-        img: props.foodItem.img   // ✅ IMPORTANT
-    });
-};
+        await dispatch({ type: "ADD", id: props.foodItem._id, name: props.foodItem.name, price: finalPrice, qty: qty, size: size, img: props.foodItem.img });
+    };
     let finalPrice = qty * parseInt(options[size]);
-    useEffect(() => {
-        setSize(priceRef.current.value)
-    }, [])
+    useEffect(() => { setSize(priceRef.current.value) }, [])
     return (
-        <div>
-            <div>
-                <div className="card mt-3" style={{ "width": "18rem" }}>
-                    <img src={props.foodItem.img} className="card-img-top" alt="Food Item " style={{ height: "120px", objectFit: "fill" }} />
-                    <div className="card-body">
-                        <h5 className="card-title">{props.foodItem.name}</h5>
-                        <div className="container w-100">
-                            <select className='m-2 h-100  bg-success rounded' onChange={(e) => setQty(e.target.value)}>
-                                {Array.from(Array(6), (e, i) => {
-                                    return (
-                                        <option key={i + 1} value={i + 1}>{i + 1}</option>
-                                    )
-                                })}
-                            </select>
-
-                            <select className='m-2 h-100  bg-success rounded' ref={priceRef} onChange={(e) => setSize(e.target.value)}>
-                                {priceOptions.map((data) => {
-                                    return <option key={data} value={data}>{data}</option>
-                                })}
-                            </select>
-
-                            <div className='d-inline h-100 fs-5'>
-                                {finalPrice}/-
-                            </div>
-                            <hr>
-                            </hr>
-                            <button className={'btn btn-success justify-center ms-2'} onClick={handleAddToCart}>Add to cart</button>
-                        </div>
-                    </div>
+        <article className="card food-card">
+            <img src={props.foodItem.img} className="food-card-image" alt={props.foodItem.name} />
+            <div className="card-body">
+                <h5 className="food-card-title">{props.foodItem.name}</h5>
+                <div className="food-controls">
+                    <select className="food-select" aria-label="Quantity" onChange={(e) => setQty(e.target.value)}>
+                        {Array.from(Array(6), (e, i) => <option key={i + 1} value={i + 1}>Qty: {i + 1}</option>)}
+                    </select>
+                    <select className="food-select" aria-label="Size" ref={priceRef} onChange={(e) => setSize(e.target.value)}>
+                        {priceOptions.map((data) => <option key={data} value={data}>{data}</option>)}
+                    </select>
                 </div>
+                <div className="food-price"><small>Total</small><span>₹{finalPrice}</span></div>
+                <button className="add-cart-btn" onClick={handleAddToCart}>Add to cart</button>
             </div>
-        </div>
+        </article>
     )
 }

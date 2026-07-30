@@ -10,9 +10,7 @@ export default function Cart() {
 
     if (data.length === 0) {
         return (
-            <div>
-                <div className='m-5 w-100 text-center fs-3'>The Cart is Empty!</div>
-            </div>
+            <div className="empty-cart"><strong>Your cart is waiting.</strong>Add something delicious from the menu to get started.</div>
         );
     }
 
@@ -40,9 +38,9 @@ export default function Cart() {
 
     return (
         <div>
-            <div className='container m-auto mt-5 table-responsive'>
-                <table className='table table-hover'>
-                    <thead className='text-success fs-4'>
+            <div className='cart-wrap'>
+                <div className="table-responsive"><table className='table cart-table'>
+                    <thead>
                         <tr>
                             <th>#</th>
                             <th>Image</th>
@@ -64,12 +62,7 @@ export default function Cart() {
                                     <img
                                         src={food.img}
                                         alt={food.name}
-                                        style={{
-                                            height: "50px",
-                                            width: "50px",
-                                            objectFit: "cover",
-                                            borderRadius: "6px"
-                                        }}
+                                        className="cart-image"
                                     />
                                 </td>
 
@@ -81,34 +74,29 @@ export default function Cart() {
                                 <td>
                                     <button
                                         type="button"
-                                        className="btn p-0"
+                                        className="remove-btn"
                                         onClick={() => dispatch({ type: "REMOVE", index: index })}
                                     >
                                         <img
                                             src={trash}
                                             alt="delete"
-                                            style={{
-                                                height: '24px',
-                                                filter: 'brightness(0) invert(1)'
-                                            }}
                                         />
                                     </button>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
-                </table>
+                </table></div>
 
-                <div className="mt-3">
-                    <h2>Total Price: ₹{totalPrice}/-</h2>
-                </div>
+                <div className="cart-total"><h2>Total <span>₹{totalPrice}/-</span></h2>
 
                 <button
-                    className='btn bg-success mt-3'
+                    className='checkout-btn'
                     onClick={handleCheckOut}
                 >
                     Check Out
                 </button>
+                </div>
             </div>
         </div>
     );

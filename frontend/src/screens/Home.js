@@ -70,22 +70,9 @@ export default function Home() {
   return (
     <div>
       <div><Navbar /></div>
-      <div>
+      <section className="hero">
         <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel">
           <div className="carousel-inner" id='carousel'>
-            <div className="carousel-caption" style={{ zIndex: "10", top: '80%' }}>
-              <div className="d-flex justify-content-center">
-                <input
-                  className="form-control me-2"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                  value={search}
-                  onChange={(e) => { setSearch(e.target.value) }}
-                />
-              </div>
-            </div>
-
             {/* 🔥 CRITICAL FIX: Dynamically mapping carousel items */}
             {carouselImgs.length > 0 ? (
               carouselImgs.map((imgUrl, index) => (
@@ -120,17 +107,27 @@ export default function Home() {
             <span className="visually-hidden">Next</span>
           </button>
         </div>
-      </div>
+        <div className="hero-copy">
+          <div className="hero-copy-inner">
+            <span className="hero-eyebrow">Fresh flavours, at your door</span>
+            <h1 className="hero-title">Good food makes every day better.</h1>
+            <p className="hero-subtitle">Browse comforting favourites and vibrant new flavours, all ready when you are.</p>
+            <div className="hero-search">
+              <input className="form-control hero-search-input" type="search" placeholder="Search pizza, biryani, momos..." aria-label="Search food" value={search} onChange={(e) => { setSearch(e.target.value) }} />
+              <button className="hero-search-btn" type="button">Explore menu</button>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <div className="container">
+      <main className="container menu-section">
         {
           foodCat.length > 0 ? (
             foodCat.map((category) => (
-              <div key={category._id} className="row mb-3">
-                <div className="fs-3 m-3">
-                  {category.CategoryName}
+              <section key={category._id} className="category-row">
+                <div className="section-heading">
+                  <div><p className="section-kicker">Curated for you</p><h2 className="category-title">{category.CategoryName}</h2></div>
                 </div>
-                <hr />
                 <div className="row">
                   {/* Filter by Category and Search */}
                   {foodItem
@@ -149,17 +146,17 @@ export default function Home() {
                         </div>
                       ))
                   ) : (
-                    <div className="text-muted m-3">
+                    <div className="empty-category">
                       {search === '' ? "No items found in this category." : `No items matching "${search}" found in this category.`}
                     </div>
                   )}
                 </div>
-              </div>
+              </section>
             ))
           ) : (
-            <div>Loading...</div>
+            <div className="loading-state">Loading today’s menu...</div>
           )}
-      </div>
+      </main>
 
       <Footer />
     </div>

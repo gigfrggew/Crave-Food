@@ -51,8 +51,11 @@ export default function Login() {
   };
 
   return (
-    <div className="container">
-      <form onSubmit={handleSubmit}>
+    <main className="auth-page">
+      <form className="auth-card" onSubmit={handleSubmit}>
+        <div className="auth-kicker">Welcome back</div>
+        <h1 className="auth-title">Sign in to CraveFood</h1>
+        <p className="auth-copy">Pick up right where your cravings left off.</p>
         
         <div className="mb-3">
           <label htmlFor="loginEmail" className="form-label">Email address</label>
@@ -80,14 +83,12 @@ export default function Login() {
           />
         </div>
 
-        <button type="submit" className="m-3 btn btn-success">
-          Submit
+        <button type="submit" className="btn btn-success auth-submit">
+          Sign in
         </button>
 
-        <Link to="/createuser" className="m-3 btn btn-danger">
-          I'm a new user
-        </Link>
+        <p className="mb-0 text-center text-muted">New to CraveFood? <Link to="/signup" className="auth-link">Create an account</Link></p>
       </form>
-    </div>
+    </main>
   );
 }

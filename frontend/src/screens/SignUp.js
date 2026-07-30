@@ -51,8 +51,11 @@ export default function SignUp() {
 
     return (
         <>
-            <div className="container">
-                <form onSubmit={handleSubmit}>
+            <main className="auth-page">
+                <form className="auth-card" onSubmit={handleSubmit}>
+                    <div className="auth-kicker">Start ordering</div>
+                    <h1 className="auth-title">Create your account</h1>
+                    <p className="auth-copy">A few details and your next favourite meal is close by.</p>
                     <div className="mb-3">
                         <label htmlFor="name" className="form-label">Name</label>
                         <input
@@ -104,15 +107,13 @@ export default function SignUp() {
                         />
                     </div>
 
-                    <button type="submit" className="m-3 btn btn-success">
-                        Submit
+                    <button type="submit" className="btn btn-success auth-submit">
+                        Create account
                     </button>
 
-                    <Link to="/login" className="m-3 btn btn-danger">
-                        Already a user
-                    </Link>
+                    <p className="mb-0 text-center text-muted">Already have an account? <Link to="/login" className="auth-link">Sign in</Link></p>
                 </form>
-            </div>
+            </main>
         </>
     );
 }

@@ -1,36 +1,18 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 
-const MODAL_STYLES = {
-  position: 'fixed',
-  top: '50%',
-  left: '50%',
-  backgroundColor: 'rgb(34,34,34)',
-  transform: 'translate(-50%, -50%)',
-  zIndex: 1000,
-  height: '90%',
-  width: '90%'
-}
-
-const OVERLAY_STYLES = {
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  backgroundColor: 'rgba(0, 0, 0, .7)',
-  zIndex: 1000
-}
-
 export default function Modal({ children, onClose }) {
 
     return ReactDom.createPortal(
         <>
-            <div style={OVERLAY_STYLES} /> {/* Added onClick on overlay to close when clicking outside */}
-            <div style={MODAL_STYLES}>
-                {/* 1. This "X" button calls the onClose prop (which comes from Navbar.js) */}
-                <button className='btn bg-danger fs-4' style={{ marginLeft: "90%", marginTop: "-35px" }} onClick={onClose}> X </button>
+            <div className="cart-overlay">
+            <div className="cart-modal">
+                <div className="cart-modal-head">
+                  <h2>Your cart</h2>
+                  <button className="modal-close" aria-label="Close cart" onClick={onClose}>×</button>
+                </div>
                 {children}
+            </div>
             </div>
         </>,
         document.getElementById('cart-root')
