@@ -85,8 +85,6 @@ export default function Home() {
                     src={imgUrl}
                     className="d-block w-100"
                     alt={`Food Slide ${index + 1}`}
-                    // Added object-fit for better visual consistency
-                    style={{ filter: "brightness(30%)", objectFit: "cover", maxHeight: "550px" }}
                   />
                 </div>
               ))
