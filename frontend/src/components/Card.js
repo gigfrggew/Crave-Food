@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useDispatchCart, useCart } from '../context/ContextReducer'
+import { toast } from 'react-toastify';
 
 export default function Card(props) {
     let dispatch = useDispatchCart();
@@ -14,12 +15,15 @@ export default function Card(props) {
         if (existingItem) {
             if (existingItem.size === size) {
                 await dispatch({ type: "UPDATE", id: props.foodItem._id, price: finalPrice, qty: qty, size: size });
+                toast.success("Added to cart successfully.", { toastId: 'cart-added' });
                 return;
             }
             await dispatch({ type: "ADD", id: props.foodItem._id, name: props.foodItem.name, price: finalPrice, qty: qty, size: size, img: props.foodItem.img });
+            toast.success("Added to cart successfully.", { toastId: 'cart-added' });
             return;
         }
         await dispatch({ type: "ADD", id: props.foodItem._id, name: props.foodItem.name, price: finalPrice, qty: qty, size: size, img: props.foodItem.img });
+        toast.success("Added to cart successfully.", { toastId: 'cart-added' });
     };
     let finalPrice = qty * parseInt(options[size]);
     useEffect(() => { setSize(priceRef.current.value) }, [])

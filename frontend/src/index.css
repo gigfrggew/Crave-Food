@@ -91,7 +91,7 @@ a { color:inherit; }
 .cart-wrap { padding:1.1rem 1.5rem 1.5rem; }
 .cart-table { margin:0!important; vertical-align:middle; }
 .cart-table thead { color:var(--muted); font-size:.75rem; letter-spacing:.08em; text-transform:uppercase; }
-.cart-table th,.cart-table td { padding:1rem .7rem; border-color:var(--line); }
+.cart-table th,.cart-table td { padding:1rem .7rem; border-color:var(--line); color:#000; }
 .cart-image { width:58px; height:58px; border-radius:10px; object-fit:cover; }
 .cart-total { display:flex; justify-content:space-between; align-items:center; gap:1rem; margin-top:1.25rem; padding:1.1rem 0; border-top:1px solid var(--line); }
 .cart-total h2 { margin:0; font-size:1.25rem; }

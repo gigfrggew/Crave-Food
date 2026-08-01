@@ -12,12 +12,15 @@ import Login from './screens/Login';
 import Signup from './screens/SignUp';
 import { CartProvider } from './context/ContextReducer';
 import MyOrder from './screens/MyOrder.js';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // import MyOrder from './screens/MyOrder';
 
 
 function App() {
   return (
     <CartProvider>
+      <ToastContainer position="top-right" autoClose={3000} closeOnClick />
       <Router>
         <div>
           <Routes>

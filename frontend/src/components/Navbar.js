@@ -4,6 +4,7 @@ import Badge from 'react-bootstrap/Badge'
 import Modal from './Modal' // Assuming Modal is in src/Modal.js
 import Cart from '../screens/Cart' // Assuming Cart is in src/screens/Cart.js
 import { useCart } from '../context/ContextReducer' // Import useCart to get item count
+import { toast } from 'react-toastify';
 
 export default function Navbar() {
     const [cartView, setCartView] = useState(false) // 1. State to manage modal visibility
@@ -12,6 +13,7 @@ export default function Navbar() {
 
     const handleLogout = () => {
         localStorage.removeItem("authToken");
+        toast.info("Logged out successfully.", { toastId: 'logout-success' });
         navigate("/login");
     }
 

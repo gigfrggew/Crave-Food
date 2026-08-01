@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 export default function SignUp() {
 
@@ -32,17 +33,17 @@ export default function SignUp() {
         // If backend returns success:false
         if (!json.success) {
             if (json.errors) {
-                alert(json.errors[0].msg);  // Show first validation error
+                toast.error(json.errors[0].msg, { toastId: 'signup-error' });
             } else if (json.error) {
-                alert(json.error);
+                toast.error(json.error, { toastId: 'signup-error' });
             } else {
-                alert("Signup failed");
+                toast.error("Unable to create account.", { toastId: 'signup-error' });
             }
             return;
         }
 
         // If signup successful
-        alert("Signup successful! Please log in.");
+        toast.success("Account created successfully.", { toastId: 'signup-success' });
     };
 
     const onChange = (event) => {

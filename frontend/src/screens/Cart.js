@@ -1,6 +1,7 @@
 import React from 'react';
 import { useCart, useDispatchCart } from '../context/ContextReducer';
 import trash from "../trash.svg";
+import { toast } from 'react-toastify';
 
 export default function Cart() {
     let data = useCart();
@@ -17,20 +18,27 @@ export default function Cart() {
     const handleCheckOut = async () => {
         let userEmail = localStorage.getItem("userEmail");
 
-        let response = await fetch("http://localhost:5000/api/orderData", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                order_data: data,
-                email: userEmail,
-                order_date: new Date().toDateString()
-            })
-        });
+        try {
+            let response = await fetch("http://localhost:5000/api/orderData", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    order_data: data,
+                    email: userEmail,
+                    order_date: new Date().toDateString()
+                })
+            });
 
-        if (response.status === 200) {
-            dispatch({ type: "DROP" })
+            if (response.status === 200) {
+                dispatch({ type: "DROP" });
+                toast.success("Order placed successfully.", { toastId: 'order-success' });
+            } else {
+                toast.error("Failed to place order.", { toastId: 'order-error' });
+            }
+        } catch (error) {
+            toast.error("Failed to place order.", { toastId: 'order-error' });
         }
     }
 
@@ -75,7 +83,10 @@ export default function Cart() {
                                     <button
                                         type="button"
                                         className="remove-btn"
-                                        onClick={() => dispatch({ type: "REMOVE", index: index })}
+                                        onClick={() => {
+                                            dispatch({ type: "REMOVE", index: index });
+                                            toast.info("Item removed from cart.", { toastId: 'cart-removed' });
+                                        }}
                                     >
                                         <img
                                             src={trash}
@@ -94,7 +105,7 @@ export default function Cart() {
                     className='checkout-btn'
                     onClick={handleCheckOut}
                 >
-                    Check Out
+                    Order
                 </button>
                 </div>
             </div>

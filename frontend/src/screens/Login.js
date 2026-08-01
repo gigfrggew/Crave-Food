@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 export default function Login() {
 
@@ -30,9 +31,9 @@ export default function Login() {
     // If login failed
     if (!json.success) {
       if (json.error) {
-        alert(json.error);  // Backend sends error message
+        toast.error(json.error, { toastId: 'login-error' });
       } else {
-        alert("Invalid login credentials");
+        toast.error("Invalid email or password.", { toastId: 'login-error' });
       }
       return; // Stop further execution
     }
@@ -40,6 +41,7 @@ export default function Login() {
     // If login successful
     localStorage.setItem("userEmail", credentials.email);
     localStorage.setItem("authToken", json.authToken);
+    toast.success("Logged in successfully.", { toastId: 'login-success' });
 
     console.log("Auth Token Saved:", localStorage.getItem("authToken"));
 
