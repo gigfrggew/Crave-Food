@@ -3,8 +3,11 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use((req,res,next)=>{
-  res.setHeader("Access-Control-Allow-Origin","http://localhost:3000");
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://crave-food44.netlify.app"
+  );
   res.header(
     "Access-Control-Allow-Headers",
     "Origin,X-Requested-With,Content-Type,Accept"
@@ -12,12 +15,12 @@ app.use((req,res,next)=>{
   next();
 })
 const mongoDB = require("./db");
-mongoDB();  
+mongoDB();
 
 app.use(express.json())
-app.use('/api',require("./routes/CreatUser"))
-app.use('/api',require("./routes/DisplayData"))
-app.use('/api',require("./routes/OrderData"))
+app.use('/api', require("./routes/CreatUser"))
+app.use('/api', require("./routes/DisplayData"))
+app.use('/api', require("./routes/OrderData"))
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
