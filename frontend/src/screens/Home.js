@@ -16,7 +16,7 @@ export default function Home() {
   const loadData = async () => {
     try {
       // 1. Fetch Food Data
-      let response = await fetch("http://localhost:5000/api/foodData", {
+      let response = await fetch("https://crave-food-backend.onrender.com/api/foodData", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'

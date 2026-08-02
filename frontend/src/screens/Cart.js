@@ -19,7 +19,7 @@ export default function Cart() {
         let userEmail = localStorage.getItem("userEmail");
 
         try {
-            let response = await fetch("http://localhost:5000/api/orderData", {
+            let response = await fetch("https://crave-food-backend.onrender.com/api/orderData", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
