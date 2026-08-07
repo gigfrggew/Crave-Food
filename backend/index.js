@@ -6,14 +6,16 @@ const port = process.env.PORT || 5000;
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://crave-food44.netlify.app"
+    "https://cravefood4.netlify.app"
   );
+
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin,X-Requested-With,Content-Type,Accept"
+    "Origin, X-Requested-With, Content-Type, Accept"
   );
+
   next();
-})
+});
 const mongoDB = require("./db");
 mongoDB();
 
@@ -26,6 +28,6 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`app listening on port ${port}`);
 });
 
